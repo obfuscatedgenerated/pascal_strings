@@ -5,7 +5,8 @@
 unsigned char *cn_to_p_string(const char *c_string, size_t n) {
     unsigned char *p_string = malloc(n * sizeof(char));
     if (p_string == NULL) {
-        return NULL;
+        fputs("Memory allocation failed", stderr);
+        exit(EXIT_FAILURE);
     }
     p_string[0] = n; // first byte is the length of the string
     for (size_t i = 0; i < n; i++) { // from first c char to last c char (no null terminator)

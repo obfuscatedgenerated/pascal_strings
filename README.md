@@ -10,3 +10,7 @@ They were first implemented in the UCSD implementation of the *Pascal* programmi
 ## Examples of use cases
 
 They can be found in a variety of programs, but the most famously known implementation is in *Microsoft Excel* (accurate as of [2010](https://stackoverflow.com/questions/492384/how-to-find-the-size-of-an-array-from-a-pointer-pointing-to-the-first-element-a#comment3358256_492428)).
+
+## One big drawback
+
+As a single unsigned integer takes up 1 byte, the size is limited to 255 characters.

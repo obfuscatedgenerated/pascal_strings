@@ -16,7 +16,7 @@ unsigned char *cn_to_p_string(const char *c_string, size_t n) {
 }
 
 unsigned char *c_to_p_string(const char *c_string) {
-    size_t n = strlen(c_string); // take length of c string as n value
+    size_t n = strlen(c_string); // take length of c string as n value (this method loses some optimisation)
     return cn_to_p_string(c_string, n);
 }
 

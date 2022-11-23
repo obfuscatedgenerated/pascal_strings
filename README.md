@@ -5,7 +5,7 @@
 
 Pascal strings are a method of storing string data by prepending the length of the string at the start, rather than appending a null byte. This has some key advantages, such as optimisation (think iteration) and string handling safety (e.g. missing null byte), as well as preventing the need to pass the string length or predict it using strlen when using certain functions.
 
-They were first implemented in the UCSD implemenation of the Pascal programming language, hence the name.
+They were first implemented in the UCSD implementation of the Pascal programming language, hence the name.
 
 ## Examples of use cases
 

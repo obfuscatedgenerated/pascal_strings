@@ -3,4 +3,5 @@ project(pascal_strings C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(pascal_strings src/main.c)
+add_executable(pascal_strings src/pascal_strings.c)
+

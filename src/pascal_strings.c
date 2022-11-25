@@ -3,7 +3,7 @@
 #include <string.h>
 
 unsigned char *cn_to_p_string(const char *c_string, size_t n) {
-    unsigned char *p_string = malloc(n * sizeof(char));
+    unsigned char *p_string = malloc(n * sizeof(unsigned char));
     if (p_string == NULL) {
         fputs("Memory allocation failed", stderr);
         exit(EXIT_FAILURE);

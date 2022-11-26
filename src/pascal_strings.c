@@ -36,6 +36,6 @@ int main() {
 
     puts("\n");
 
-    print_p_string((unsigned char*) "\005Test!"); // or encode length in first byte for extra speed
+    print_p_string((unsigned char *) "\005Test!"); // or encode length in first byte for extra speed
     return 0;
 }

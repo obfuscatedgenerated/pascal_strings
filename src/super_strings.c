@@ -6,8 +6,8 @@
 
 unsigned char *
 make_header(size_t n, size_t *start_ptr) { // returns header, assigns where to start filling chars to start_ptr
-    size_t maxvalue_bytes_count = floor((double) n /
-                                        UCHAR_MAX); // if less than unsigned char max (assumed 255 from now on), don't add any 255 value maxvalue "blocks", correct value set in last byte
+    // if less than unsigned char max (assumed 255 from now on), don't add any 255 value maxvalue "blocks", correct value set in last byte
+    size_t maxvalue_bytes_count = floor((double) n / UCHAR_MAX);
 
     if (maxvalue_bytes_count > UCHAR_MAX) {
         fputs("String is too large", stderr);

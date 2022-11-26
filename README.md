@@ -14,3 +14,9 @@ They can be found in a variety of programs, but the most famously known implemen
 ## One big drawback
 
 As a single unsigned integer takes up 1 byte, the size is limited to 255 characters.
+
+# Super Strings
+
+This is a method that I made up (although I'm sure it's been done before) that I dub "super strings". It's a method of storing strings in a similar way to Pascal strings, but rather than storing a single value that is the exact value of the length, we use 2 bytes. The first one is multiplied by the maximum unsigned char value (255) and added to the second one. This allows for a maximum length of 65,280 characters.
+
+Initially, the format was that the first byte indicated the number of bytes that followed to be added to each other, but I realised that repeating 255 over and over is not efficient. The new method is more efficient, but it means incompatibility with systems that don't use the same maximum unsigned char value when sent over the network. However, this is not a problem for local use and I have never seen a system that uses a different maximum unsigned char value (not counting when unicode/wchar is expressly opted into).

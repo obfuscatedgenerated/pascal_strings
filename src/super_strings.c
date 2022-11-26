@@ -6,30 +6,19 @@
 
 unsigned char *
 make_header(size_t n, size_t *start_ptr) { // returns header, assigns where to start filling chars to start_ptr
-    size_t header_bytes_count;
+    size_t maxvalue_bytes_count = floor((double) n /
+                                        UCHAR_MAX); // if less than unsigned char max (assumed 255 from now on), don't add any 255 value maxvalue "blocks", correct value set in last byte
 
-    if (n < 255) { // if less than 255, don't add any 255 value "blocks", correct value set in last byte
-        header_bytes_count = 0;
-    } else {
-        header_bytes_count = ceil((double) n / UCHAR_MAX);
-    }
-
-    if (header_bytes_count > UCHAR_MAX) {
+    if (maxvalue_bytes_count > UCHAR_MAX) {
         fputs("String is too large", stderr);
         exit(EXIT_FAILURE);
     }
 
-    unsigned char count_byte;
+    unsigned char total_bytes_count = maxvalue_bytes_count + 1; // add 1 for last byte
 
-    if (header_bytes_count == 0) { // if no 255 value "blocks", set count_byte to 1 to ensure the last byte scans
-        count_byte = 1;
-    } else {
-        count_byte = header_bytes_count;
-    }
+    size_t last_byte_value = n - (maxvalue_bytes_count * UCHAR_MAX);
 
-    size_t last_byte_value = n - (header_bytes_count * UCHAR_MAX);
-
-    size_t size = (count_byte + 1) * sizeof(unsigned char); // number of blocks + 1 for the count byte itself
+    size_t size = (total_bytes_count + 1) * sizeof(unsigned char); // number of blocks + 1 for the count byte itself
     unsigned char *header = malloc(size);
 
     if (header == NULL) {
@@ -37,11 +26,11 @@ make_header(size_t n, size_t *start_ptr) { // returns header, assigns where to s
         exit(EXIT_FAILURE);
     }
 
-    header[0] = count_byte; // first byte
+    header[0] = total_bytes_count; // first byte
 
     size_t i;
-    for (i = 0; i < header_bytes_count; i++) { // n bytes - 1
-        header[i + 1] = sizeof(unsigned char);
+    for (i = 0; i < maxvalue_bytes_count; i++) { // n bytes - 1
+        header[i + 1] = UCHAR_MAX;
     }
 
     header[i +
@@ -107,6 +96,7 @@ void print_s_string(const unsigned char *s_string) {
 int main(void) {
     // super strings: byte 1 is dedicated to the number of bytes (n) that follow
     // the addition of the next n "header" bytes are dedicated to the string length
-    unsigned char *res = c_to_s_string("hello world");
+    unsigned char *res = c_to_s_string(
+            "pascal strings encode the length of the string as a byte leading before the characters rather than using a null terminator. pascal strings are great but limited to the maximum unsigned char size (assuming 255). super strings fix that! for example: this string is over 255 characters long, yet everything is okay!");
     print_s_string(res);
 }
